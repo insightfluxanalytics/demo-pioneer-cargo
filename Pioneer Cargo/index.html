@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer Cargo | Courier &amp; Logistics Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<style>
+:root {
+  --red: #dc1c13;
+  --red-dark: #b9140c;
+  --navy: #0f172a;
+  --sidebar: #0b1523;
+  --ink: #111827;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --bg: #f8fafc;
+  --white: #ffffff;
+  --green: #16a34a;
+  --green-dark: #15803d;
+  --green-bg: #dcfce7;
+  --blue: #2563eb;
+  --blue-bg: #dbeafe;
+  --amber: #d97706;
+  --amber-bg: #fef3c7;
+  --danger: #dc2626;
+  --danger-bg: #fee2e2;
+  --shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  --sans: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--sans); background: var(--white); color: var(--ink); line-height: 1.5; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.hidden { display: none !important; }
+
+/* ================= TOPBAR ================= */
+.topbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.brand-text strong {
+  display: block;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  color: var(--red);
+  line-height: 1.05;
+}
+.brand-text small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.nav { display: flex; align-items: center; gap: 26px; }
+.nav a {
+  text-decoration: none;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+.nav a:hover, .nav a.active-link { color: var(--red); }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+
+.btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 700;
+  font-size: 13.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: all 0.18s ease;
+}
+.btn-red { background: var(--red); color: var(--white); }
+.btn-red:hover { background: var(--red-dark); transform: translateY(-1px); }
+.btn-green { background: var(--green); color: var(--white); }
+.btn-green:hover { background: var(--green-dark); }
+.btn-dark { background: var(--navy); color: var(--white); }
+.btn-outline { background: var(--white); color: var(--ink); border: 1px solid #cbd5e1; }
+.btn-outline:hover { background: #f8fafc; border-color: #94a3b8; }
+.btn-danger { background: var(--danger-bg); color: var(--danger); }
+.btn-sm { padding: 6px 11px; font-size: 12px; }
+.btn-pill { border-radius: 999px; padding: 12px 24px; }
+.mobile-toggle { display: none; background: #f1f5f9; border: 1px solid var(--line); border-radius: 7px; padding: 7px 12px; font-weight: 700; }
+
+/* ================= IMAGE 1: HERO TRACKING BANNER ================= */
+.hero-banner {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: stretch;
+  min-height: 470px;
+}
+.hero-content {
+  padding: 56px 32px 56px 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--white);
+  position: relative;
+  z-index: 2;
+}
+.hero-media {
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  background: #f8fafc;
+}
+.hero-media img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 192%;
+  max-width: none;
+  object-fit: cover;
+  object-position: right center;
+}
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 90px;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+.hero-content h1 {
+  font-size: clamp(34px, 4.5vw, 52px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--navy);
+  margin: 0 0 14px;
+  letter-spacing: -0.02em;
+}
+.hero-content h1 span { color: var(--red); }
+.hero-content p {
+  font-size: 16px;
+  color: #334155;
+  margin: 0 0 26px;
+  max-width: 470px;
+}
+.hero-search-pill {
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.14);
+  border: 1px solid #e2e8f0;
+  gap: 8px;
+}
+.hero-search-pill .pin-ico {
+  color: var(--red);
+  display: grid;
+  place-items: center;
+  padding-left: 10px;
+  flex-shrink: 0;
+}
+.hero-search-pill input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 10px 6px;
+  font-size: 14.5px;
+  min-width: 0;
+  color: var(--ink);
+}
+.hero-search-pill button {
+  background: var(--red);
+  color: var(--white);
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 22px;
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.hero-search-pill button:hover { background: var(--red-dark); }
+.sample-chips {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #475569;
+  font-weight: 600;
+}
+.chip {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+}
+.chip:hover { background: var(--red); color: var(--white); border-color: var(--red); }
+.track-error {
+  margin-top: 12px;
+  background: var(--danger-bg);
+  color: var(--danger);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ================= TRACKING RESULT ================= */
+.result-wrap { max-width: 1180px; margin: 28px auto 0; padding: 0 5%; scroll-margin-top: 84px; }
+.result-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+.result-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.result-ids h3 { margin: 4px 0; font-size: 24px; color: var(--navy); }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--green-bg);
+  color: var(--green-dark);
+}
+.pill.transit { background: var(--blue-bg); color: var(--blue); }
+.pill.pending { background: var(--amber-bg); color: var(--amber); }
+.pill.picked { background: #e0e7ff; color: #4338ca; }
+.pill.exception { background: var(--danger-bg); color: var(--danger); }
+
+.progress-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 22px 0;
+}
+.prog-stage { text-align: center; }
+.prog-bar { height: 6px; border-radius: 4px; background: #e2e8f0; margin-bottom: 7px; }
+.prog-stage.active .prog-bar { background: var(--red); }
+.prog-stage.done .prog-bar { background: var(--green); }
+.prog-stage span { font-size: 12px; font-weight: 700; color: var(--muted); }
+.prog-stage.active span, .prog-stage.done span { color: var(--navy); }
+
+.result-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin-bottom: 22px;
+}
+.meta-item small { display: block; font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+.meta-item strong { font-size: 14px; color: var(--navy); }
+
+.timeline { margin-left: 10px; border-left: 2px solid #cbd5e1; padding-left: 22px; }
+.tl-step { position: relative; padding-bottom: 18px; }
+.tl-step:last-child { padding-bottom: 0; }
+.tl-step::before {
+  content: "";
+  position: absolute;
+  left: -29px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--green);
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 1px var(--green);
+}
+.tl-step:first-child::before { background: var(--red); box-shadow: 0 0 0 1px var(--red); }
+.tl-step strong { font-size: 14px; color: var(--navy); }
+.tl-step p { margin: 2px 0; font-size: 13px; color: var(--ink); }
+.tl-step small { font-size: 11.5px; color: var(--muted); }
+
+/* ================= IMAGES 2-5: FEATURE SHOWCASE SECTIONS ================= */
+.showcase-section {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 54px 5%;
+}
+.showcase-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.tab-btn {
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13.5px;
+  transition: all 0.18s;
+}
+.tab-btn.active {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+  box-shadow: 0 6px 18px rgba(220, 28, 19, 0.25);
+}
+.feature-banner {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  min-height: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--white);
+}
+.feature-banner-content {
+  padding: 42px 32px 42px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--white);
+  position: relative;
+  z-index: 2;
+}
+.feature-media {
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+  background: #f8fafc;
+}
+.feature-media img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 165%;
+  max-width: none;
+  object-fit: cover;
+  object-position: right center;
+}
+.feature-media::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 80px;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+.feature-banner-content h2 {
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 900;
+  line-height: 1.12;
+  color: var(--navy);
+  margin: 0 0 12px;
+}
+.feature-banner-content h2 span { color: var(--red); display: block; }
+.feature-banner-content p {
+  font-size: 15px;
+  color: #334155;
+  margin: 0 0 22px;
+}
+.mini-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.mini-pillar {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 10px;
+  text-align: center;
+}
+.mini-pillar .ico { color: var(--red); display: flex; justify-content: center; margin-bottom: 6px; }
+.mini-pillar span { display: block; font-size: 12px; font-weight: 700; color: var(--navy); line-height: 1.25; }
+
+/* ================= FOOTER ================= */
+.site-footer { background: var(--sidebar); color: #cbd5e1; font-size: 13.5px; }
+.footer-main {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 46px 5%;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.1fr;
+  gap: 36px;
+}
+.footer-col h3 { color: var(--white); font-size: 17px; margin: 0 0 12px; }
+.red-divider { width: 38px; border-bottom: 3px solid var(--red); margin-bottom: 16px; }
+.footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+.footer-links a { color: #cbd5e1; text-decoration: none; font-size: 13px; }
+.footer-links a:hover { color: var(--white); }
+.office-item { margin-bottom: 8px; }
+.copyright-bar {
+  background: var(--red);
+  color: var(--white);
+  padding: 13px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.copyright-bar a { color: var(--white); text-decoration: none; margin-left: 14px; }
+
+/* ================= IMAGE 6: ADMIN LOGIN SPLIT UI ================= */
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  background: #f1f5f9;
+  position: relative;
+}
+.login-visual {
+  position: relative;
+  padding: 44px 54px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: url('assets/admin-login.jpg') left bottom / 165% auto no-repeat;
+  background-color: #eef2f6;
+  overflow: hidden;
+}
+.login-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.92) 34%, rgba(248, 250, 252, 0.08) 62%, rgba(15, 23, 42, 0.1) 100%);
+}
+.login-visual-top, .login-visual-bottom { position: relative; z-index: 1; }
+.login-visual-top h2 { font-size: 40px; font-weight: 900; color: var(--navy); margin: 28px 0 8px; }
+.login-visual-top .red-bar { width: 48px; height: 4px; background: var(--red); border-radius: 2px; margin-bottom: 14px; }
+.login-visual-top p { font-size: 16px; color: #1e293b; max-width: 420px; margin: 0; font-weight: 500; }
+.login-feature-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+.lf-item { text-align: center; }
+.lf-item .ico { color: var(--red); display: flex; justify-content: center; margin-bottom: 6px; }
+.lf-item span { display: block; font-size: 11.5px; font-weight: 700; color: var(--navy); line-height: 1.25; }
+
+.login-form-pane {
+  display: grid;
+  place-items: center;
+  padding: 36px 28px;
+  background: linear-gradient(155deg, #f8fafc 75%, var(--red) 75%);
+}
+.login-card {
+  width: min(420px, 100%);
+  background: var(--white);
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.14);
+}
+.login-card-head { text-align: center; margin-bottom: 24px; }
+.login-card-head h1 { font-size: 26px; font-weight: 900; color: var(--navy); margin: 14px 0 8px; }
+.login-card-head .red-bar { width: 38px; height: 3px; background: var(--red); margin: 0 auto; border-radius: 2px; }
+.input-icon-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 0 12px;
+  background: var(--white);
+  margin-bottom: 14px;
+}
+.input-icon-wrap:focus-within { border-color: var(--red); box-shadow: 0 0 0 3px rgba(220, 28, 19, 0.1); }
+.input-icon-wrap .ico { color: var(--muted); display: flex; margin-right: 10px; }
+.input-icon-wrap input { flex: 1; border: 0; outline: none; padding: 12px 0; font-size: 14px; background: transparent; }
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.login-options label { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; color: var(--ink); cursor: pointer; }
+.login-options input[type="checkbox"] { accent-color: var(--red); width: 15px; height: 15px; }
+.login-options a { color: var(--red); text-decoration: none; font-weight: 600; }
+.demo-note {
+  margin-top: 16px;
+  padding: 11px 13px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+  font-size: 12px;
+  color: #7f1d1d;
+}
+
+/* ================= IMAGE 7: ADMIN SHELL & DASHBOARD ================= */
+.admin-shell { min-height: 100vh; display: grid; grid-template-columns: 250px 1fr; background: #f1f5f9; }
+.sidebar {
+  background: var(--sidebar);
+  color: #e2e8f0;
+  padding: 22px 14px;
+  display: flex;
+  flex-direction: column;
+}
+.side-link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 14px;
+  border-radius: 9px;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  transition: background 0.15s;
+}
+.side-link:hover { background: rgba(255, 255, 255, 0.08); color: var(--white); }
+.side-link.active { background: var(--red); color: var(--white); box-shadow: 0 6px 16px rgba(220, 28, 19, 0.3); }
+.sidebar-divider { border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 14px 8px; }
+.sidebar-bottom { margin-top: auto; }
+
+.admin-main { min-width: 0; display: flex; flex-direction: column; }
+.admin-top {
+  height: 64px;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  padding: 0 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-user { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.admin-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+}
+.admin-content { padding: 26px; max-width: 1440px; width: 100%; margin: 0 auto; }
+.page-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+.page-head h1 { margin: 0 0 4px; font-size: 26px; font-weight: 800; color: var(--navy); }
+.page-head h1 span { color: var(--red); }
+.page-head p { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+/* Pastel KPI Cards matching Image 7 */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 22px; }
+.kpi-card {
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+.kpi-card.kpi-red { background: #fef2f2; }
+.kpi-card.kpi-blue { background: #eff6ff; }
+.kpi-card.kpi-green { background: #f0fdf4; }
+.kpi-card.kpi-amber { background: #fffbeb; }
+.kpi-ico {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--white);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+}
+.kpi-red .kpi-ico { color: var(--red); }
+.kpi-blue .kpi-ico { color: var(--blue); }
+.kpi-green .kpi-ico { color: var(--green); }
+.kpi-amber .kpi-ico { color: var(--amber); }
+.kpi-info small { display: block; font-size: 12.5px; font-weight: 700; color: var(--navy); }
+.kpi-info strong { display: block; font-size: 28px; font-weight: 800; color: var(--ink); line-height: 1.15; margin-top: 2px; }
+
+.panel { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 22px; margin-bottom: 18px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04); }
+.panel-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.panel-head h3 { margin: 0; font-size: 16.5px; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+.toolbar { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; }
+
+/* Excel Import Stepper */
+.import-stepper { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
+.imp-step { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: flex; align-items: center; gap: 10px; }
+.imp-step.active, .imp-step.done { border-color: var(--green); background: #f0fdf4; }
+.imp-badge { width: 26px; height: 26px; border-radius: 50%; background: #e2e8f0; color: var(--ink); font-size: 12px; font-weight: 800; display: grid; place-items: center; flex-shrink: 0; }
+.imp-step.active .imp-badge, .imp-step.done .imp-badge { background: var(--green); color: var(--white); }
+.imp-step strong { display: block; font-size: 12.5px; color: var(--navy); }
+.imp-step small { font-size: 11px; color: var(--muted); }
+.dropzone { border: 2px dashed #94a3b8; border-radius: 12px; padding: 34px 20px; text-align: center; background: #f8fafc; }
+.dropzone.dragover { border-color: var(--green); background: #f0fdf4; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 600px; }
+th { text-align: left; background: #f1f5f9; color: #334155; font-size: 12px; font-weight: 700; padding: 11px 14px; }
+th:first-child { border-radius: 8px 0 0 8px; }
+th:last-child { border-radius: 0 8px 8px 0; }
+td { padding: 13px 14px; border-bottom: 1px solid var(--line); font-size: 13px; vertical-align: middle; }
+tr:last-child td { border-bottom: 0; }
+tr.bad-row { background: #fef2f2; }
+.err-tag { display: inline-block; background: var(--danger-bg); color: var(--danger); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 5px; margin: 2px 4px 2px 0; }
+.ok-tag { display: inline-block; background: var(--green-bg); color: var(--green-dark); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px; }
+
+/* Modals & Fields */
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 11.5px; font-weight: 700; color: #475569; margin-bottom: 5px; text-transform: uppercase; }
+.field { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; background: var(--white); color: var(--ink); }
+.field:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(220, 28, 19, 0.1); }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.58); display: grid; place-items: center; padding: 18px; z-index: 60; }
+.modal { background: var(--white); width: min(580px, 100%); max-height: 92vh; overflow: auto; border-radius: 14px; padding: 22px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3); }
+.modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.modal-head h3 { margin: 0; font-size: 20px; font-weight: 800; color: var(--navy); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+.full { grid-column: 1 / -1; }
+.toast { position: fixed; right: 20px; bottom: 20px; background: var(--navy); color: var(--white); padding: 12px 18px; border-radius: 9px; box-shadow: var(--shadow); z-index: 80; font-size: 13px; font-weight: 600; }
+
+@media (max-width: 960px) {
+  .login-screen, .footer-main, .stats, .admin-shell, .import-stepper, .hero-inner, .feature-banner { grid-template-columns: 1fr; }
+  .hero-content, .feature-banner-content { padding: 36px 5%; }
+  .hero-media, .feature-media { min-height: 260px; }
+  .hero-media img { width: 192%; }
+  .feature-media img { width: 172%; }
+  .hero-media::after, .feature-media::after { display: none; }
+  .login-visual { display: none; }
+  .result-meta { grid-template-columns: repeat(2, 1fr); }
+  .sidebar { display: none; }
+  .sidebar.open { display: flex; position: fixed; inset: 0 auto 0 0; width: 250px; z-index: 50; }
+  .mobile-toggle { display: inline-flex; }
+  .nav { display: none; }
+  .nav.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--white); padding: 16px 5%; border-bottom: 1px solid var(--line); align-items: flex-start; }
+}
+@media (max-width: 560px) {
+  .hero-search-pill { flex-direction: column; align-items: stretch; }
+  .hero-search-pill button { justify-content: center; }
+  .mini-pillars, .form-grid, .result-meta { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== PUBLIC WEBSITE ==================== -->
+<div id="publicApp">
+  <header class="topbar">
+    <a class="brand" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <svg width="36" height="36" viewBox="0 0 40 40" fill="none"><path d="M4 32L22 6L28 11L12 32H4Z" fill="#dc1c13"/><path d="M16 32L32 10L36 14L22 32H16Z" fill="#b9140c"/></svg>
+      <div class="brand-text">
+        <strong>PIONEER CARGO</strong>
+        <small>Courier &amp; Logistics Services</small>
+      </div>
+    </a>
+
+    <nav id="publicNav" class="nav">
+      <a href="#top" class="active-link">Track Shipment</a>
+      <a href="#servicesShowcase">Services</a>
+      <a href="#footerContact">Help Desk</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn btn-outline btn-sm" onclick="showLogin()">Admin Portal</button>
+      <button class="btn btn-red btn-sm" onclick="openPickupModal()">Doorstep Pickup</button>
+      <button class="mobile-toggle" onclick="document.getElementById('publicNav').classList.toggle('open')">Menu</button>
+    </div>
+  </header>
+
+  <!-- IMAGE 1: HOMEPAGE HERO – SHIPMENT TRACKING BANNER -->
+  <section class="hero-banner" id="top">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1>Track Your Shipment<br>Anytime, <span>Anywhere</span></h1>
+        <p>Fast, secure and reliable courier services for your business and personal deliveries.</p>
+        <form onsubmit="event.preventDefault(); trackShipment();">
+          <div class="hero-search-pill">
+            <span class="pin-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+            </span>
+            <input id="trackingInput" type="text" placeholder="Enter your tracking number (e.g. PC100245)" autocomplete="off">
+            <button type="submit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              Track Now
+            </button>
+          </div>
+        </form>
+        <div class="sample-chips">
+          <span>Sample Tracking Numbers:</span>
+          <span class="chip" onclick="quickTrack('PC100245')">PC100245</span>
+          <span class="chip" onclick="quickTrack('PC100246')">PC100246</span>
+          <span class="chip" onclick="quickTrack('PC100247')">PC100247</span>
+        </div>
+        <div id="trackErrorMsg" class="track-error hidden"></div>
+      </div>
+      <div class="hero-media">
+        <img src="assets/hero-banner.jpg" alt="Pioneer Cargo Delivery Fleet">
+      </div>
+    </div>
+  </section>
+
+  <div id="trackingResult" class="result-wrap hidden"></div>
+
+  <!-- IMAGES 2, 3, 4, 5: SERVICE SHOWCASE -->
+  <section class="showcase-section" id="servicesShowcase">
+    <div class="showcase-tabs">
+      <button class="tab-btn active" onclick="switchShowcase(0, this)">Doorstep Pickup</button>
+      <button class="tab-btn" onclick="switchShowcase(1, this)">Parcel Processing</button>
+      <button class="tab-btn" onclick="switchShowcase(2, this)">Real-Time Tracking</button>
+      <button class="tab-btn" onclick="switchShowcase(3, this)">Safe Delivery</button>
+    </div>
+    <div id="showcaseBanner"></div>
+  </section>
+
+  <footer class="site-footer" id="footerContact">
+    <div class="footer-main">
+      <div class="footer-col">
+        <h3>Information Security Policy</h3>
+        <div class="red-divider"></div>
+        <p style="margin:0;color:#94a3b8;line-height:1.7">
+          Pioneer Cargo is committed to safeguarding the confidentiality, integrity, and availability of all physical consignments and electronic shipment records across our network.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h3>Useful Links</h3>
+        <div class="red-divider"></div>
+        <div class="footer-links">
+          <a href="#top">Track Shipment</a>
+          <a href="#servicesShowcase">Services</a>
+          <a href="#" onclick="event.preventDefault();openPickupModal()">Doorstep Pickup</a>
+          <a href="#" onclick="event.preventDefault();showLogin()">Admin Portal</a>
+          <a href="#footerContact">Help Desk</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Corporate Office</h3>
+        <div class="red-divider"></div>
+        <div class="office-item"><b>Address:</b> No. 199, Logistics Avenue, Guindy, Chennai - 600 032.</div>
+        <div class="office-item"><b>Phone:</b> 044-612 66 666</div>
+        <div class="office-item"><b>Email:</b> helpdesk@pioneercargo.com</div>
+        <div class="office-item"><b>Hours:</b> Mon - Fri: 10 AM to 6:30 PM | Sat: 10 AM to 4:30 PM</div>
+      </div>
+    </div>
+    <div class="copyright-bar">
+      <span>Copyright &copy; <span id="year"></span> Pioneer Cargo. All Rights Reserved.</span>
+      <div>
+        <a href="#top">Terms &amp; Conditions</a>
+        <a href="#top">Privacy Policy</a>
+        <a href="#top">Go to Top</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== IMAGE 6: ADMIN LOGIN UI ==================== -->
+<div id="loginScreen" class="login-screen hidden">
+  <div class="login-visual">
+    <div class="login-visual-top">
+      <div class="brand">
+        <svg width="38" height="38" viewBox="0 0 40 40" fill="none"><path d="M4 32L22 6L28 11L12 32H4Z" fill="#dc1c13"/><path d="M16 32L32 10L36 14L22 32H16Z" fill="#b9140c"/></svg>
+        <div class="brand-text">
+          <strong>PIONEER CARGO</strong>
+          <small>Courier &amp; Logistics Services</small>
+        </div>
+      </div>
+      <h2>Admin Portal</h2>
+      <div class="red-bar"></div>
+      <p>Manage shipments, customers, operations and reports in one place.</p>
+    </div>
+
+    <div class="login-visual-bottom">
+      <div class="login-feature-strip">
+        <div class="lf-item">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+          <span>Shipment Management</span>
+        </div>
+        <div class="lf-item">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <span>Customer Management</span>
+        </div>
+        <div class="lf-item">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <span>Reports &amp; Analytics</span>
+        </div>
+        <div class="lf-item">
+          <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          <span>System Settings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-form-pane">
+    <div class="login-card">
+      <div class="login-card-head">
+        <div class="brand" style="justify-content:center">
+          <svg width="34" height="34" viewBox="0 0 40 40" fill="none"><path d="M4 32L22 6L28 11L12 32H4Z" fill="#dc1c13"/><path d="M16 32L32 10L36 14L22 32H16Z" fill="#b9140c"/></svg>
+          <div class="brand-text" style="text-align:left">
+            <strong>PIONEER CARGO</strong>
+            <small>Courier &amp; Logistics Services</small>
+          </div>
+        </div>
+        <h1>Admin Login</h1>
+        <div class="red-bar"></div>
+      </div>
+
+      <form onsubmit="adminLogin(event)">
+        <div class="input-icon-wrap">
+          <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          <input id="loginEmail" type="email" required placeholder="admin@pioneercargo.com">
+        </div>
+        <div class="input-icon-wrap">
+          <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <input id="loginPassword" type="password" required placeholder="Enter password">
+          <button type="button" onclick="togglePass()" style="background:none;border:0;color:var(--muted);padding:4px" title="Show/Hide Password">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="login-options">
+          <label><input type="checkbox" checked> Remember Me</label>
+          <a href="#" onclick="event.preventDefault(); fillDemoLogin(); toast('Demo credentials filled')">Fill Demo Access</a>
+        </div>
+        <button class="btn btn-red" style="width:100%;padding:13px;font-size:15px">Login to Dashboard &rarr;</button>
+      </form>
+
+      <div class="demo-note">
+        <b>Demo Credentials:</b> <code>admin@pioneercargo.com</code> / <code>Pioneer@123</code>
+      </div>
+      <button class="btn btn-outline" style="width:100%;margin-top:12px" onclick="showPublic()">&larr; Back to Track Page</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IMAGE 7: ADMIN PANEL ==================== -->
+<div id="adminApp" class="admin-shell hidden">
+  <aside id="sidebar" class="sidebar">
+    <div class="brand" style="padding:0 10px 22px">
+      <svg width="34" height="34" viewBox="0 0 40 40" fill="none"><path d="M4 32L22 6L28 11L12 32H4Z" fill="#dc1c13"/><path d="M16 32L32 10L36 14L22 32H16Z" fill="#ffffff"/></svg>
+      <div class="brand-text">
+        <strong style="color:#fff">PIONEER CARGO</strong>
+        <small style="color:#94a3b8">Admin Console</small>
+      </div>
+    </div>
+
+    <a class="side-link active" href="#" data-page="dashboard" onclick="navigate('dashboard',this)">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Dashboard
+    </a>
+    <a class="side-link" href="#" data-page="import" onclick="navigate('import',this)">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Import Excel (.xlsx)
+    </a>
+    <a class="side-link" href="#" data-page="shipments" onclick="navigate('shipments',this)">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      Shipments &amp; Status
+    </a>
+    <a class="side-link" href="#" data-page="customers" onclick="navigate('customers',this)">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+      Customers
+    </a>
+    <a class="side-link" href="#" data-page="reports" onclick="navigate('reports',this)">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Reports &amp; Export
+    </a>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-divider"></div>
+      <a class="side-link" href="#" onclick="showPublic(); toast('Switched to public Track page')">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Public Track Page
+      </a>
+      <a class="side-link" href="#" onclick="logout()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-top">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">Menu</button>
+        <strong id="topTitle" style="font-size:17px;color:var(--navy)">Dashboard</strong>
+      </div>
+      <div class="admin-user">
+        <div class="admin-avatar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <strong style="display:block;color:var(--navy);line-height:1.1">Administrator</strong>
+          <small style="color:var(--green);font-weight:700">Online</small>
+        </div>
+      </div>
+    </header>
+    <div class="admin-content" id="adminContent"></div>
+  </main>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toast" class="toast hidden"></div>
+
+<script>
+const VALID_STATUSES = ['Pending', 'Picked Up', 'In Transit', 'Out for Delivery', 'Delivered', 'Exception'];
+
+const showcaseData = [
+  {
+    title: 'Doorstep',
+    accent: 'Pickup Service',
+    desc: 'Schedule a pickup from your location and send your parcels hassle-free.',
+    img: 'assets/doorstep-pickup.jpg',
+    cta: 'Book a Pickup',
+    action: 'openPickupModal()',
+    pillars: [
+      { label: 'Quick Booking', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+      { label: 'Safe Handling', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>' },
+      { label: 'Wide Coverage', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>' }
+    ]
+  },
+  {
+    title: 'Fast & Accurate',
+    accent: 'Parcel Processing',
+    desc: 'From pickup to dispatch, we handle your shipments with speed, safety and precision.',
+    img: 'assets/parcel-processing.jpg',
+    cta: 'Track a Shipment',
+    action: "document.getElementById('trackingInput').focus();window.scrollTo({top:0,behavior:'smooth'})",
+    pillars: [
+      { label: 'Sorting & Scanning', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>' },
+      { label: 'Real-time Updates', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="8" y1="8" x2="8" y2="16"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="16" y1="8" x2="16" y2="16"/></svg>' },
+      { label: 'On-time Dispatch', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>' }
+    ]
+  },
+  {
+    title: 'Real-Time',
+    accent: 'Shipment Tracking',
+    desc: 'Track your parcel anytime, anywhere and stay updated at every step of the delivery journey.',
+    img: 'assets/realtime-tracking.jpg',
+    cta: 'Track Your Shipment',
+    action: "document.getElementById('trackingInput').focus();window.scrollTo({top:0,behavior:'smooth'})",
+    pillars: [
+      { label: 'Live Tracking', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>' },
+      { label: 'Instant Updates', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>' },
+      { label: 'Complete Journey', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>' }
+    ]
+  },
+  {
+    title: 'Safe & Secure',
+    accent: 'Parcel Delivery',
+    desc: 'Your shipments are handled with care, safety and full tracking at every step.',
+    img: 'assets/safe-delivery.jpg',
+    cta: 'Ship with Confidence',
+    action: 'openPickupModal()',
+    pillars: [
+      { label: 'Tamper-Proof Handling', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' },
+      { label: 'Safe Packaging', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>' },
+      { label: 'Trusted Delivery', svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>' }
+    ]
+  }
+];
+
+function switchShowcase(idx, btn) {
+  if (btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  const item = showcaseData[idx];
+  document.getElementById('showcaseBanner').innerHTML = `
+    <div class="feature-banner">
+      <div class="feature-banner-content">
+        <h2>${item.title} <span>${item.accent}</span></h2>
+        <p>${item.desc}</p>
+        <div class="mini-pillars">
+          ${item.pillars.map(p => `<div class="mini-pillar"><div class="ico">${p.svg}</div><span>${p.label}</span></div>`).join('')}
+        </div>
+        <button class="btn btn-red btn-pill" onclick="${item.action}">${item.cta} &rarr;</button>
+      </div>
+      <div class="feature-media">
+        <img src="${item.img}" alt="${item.title} ${item.accent}">
+      </div>
+    </div>
+  `;
+}
+
+const seedShipments = [
+  {
+    id: 'PC100245',
+    sender: 'Arun Traders',
+    receiver: 'Karthik',
+    phone: '9876543210',
+    origin: 'Coimbatore',
+    destination: 'Chennai',
+    weight: '2.5',
+    status: 'In Transit',
+    date: '2026-11-23',
+    updated: 'Shipment departed Coimbatore hub',
+    events: [
+      ['Booked', 'Shipment booked and received', '2026-11-23 09:15'],
+      ['Picked Up', 'Shipment picked up from sender', '2026-11-23 12:30'],
+      ['In Transit', 'Shipment departed Coimbatore hub', '2026-11-24 08:20']
+    ]
+  },
+  {
+    id: 'PC100246',
+    sender: 'Malar Stores',
+    receiver: 'Priya',
+    phone: '9123456780',
+    origin: 'Madurai',
+    destination: 'Bengaluru',
+    weight: '1.2',
+    status: 'Delivered',
+    date: '2026-11-22',
+    updated: 'Delivered successfully',
+    events: [
+      ['Booked', 'Shipment booked', '2026-11-22 10:00'],
+      ['In Transit', 'Reached Bengaluru hub', '2026-11-23 06:45'],
+      ['Delivered', 'Delivered successfully to receiver', '2026-11-24 14:10']
+    ]
+  },
+  {
+    id: 'PC100247',
+    sender: 'Tech World',
+    receiver: 'Ramesh',
+    phone: '9988776655',
+    origin: 'Chennai',
+    destination: 'Coimbatore',
+    weight: '4.0',
+    status: 'Pending',
+    date: '2026-11-25',
+    updated: 'Shipment information received',
+    events: [
+      ['Booked', 'Shipment information received', '2026-11-25 09:00']
+    ]
+  }
+];
+
+let shipments = JSON.parse(localStorage.getItem('pc_shipments_v3') || 'null') || seedShipments;
+function saveDB() { localStorage.setItem('pc_shipments_v3', JSON.stringify(shipments)); }
+function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.remove('hidden');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => el.classList.add('hidden'), 3000);
+}
+
+function statusClass(s) {
+  if (s === 'Delivered') return '';
+  if (s === 'In Transit' || s === 'Out for Delivery') return 'transit';
+  if (s === 'Picked Up') return 'picked';
+  if (s === 'Exception') return 'exception';
+  return 'pending';
+}
+
+/* ================= PUBLIC TRACKING ================= */
+function quickTrack(num) {
+  document.getElementById('trackingInput').value = num;
+  trackShipment();
+}
+
+function trackShipment() {
+  const q = document.getElementById('trackingInput').value.trim().toUpperCase();
+  const errBox = document.getElementById('trackErrorMsg');
+  const resBox = document.getElementById('trackingResult');
+
+  if (!q) {
+    errBox.textContent = 'Please enter a valid Tracking Number.';
+    errBox.classList.remove('hidden');
+    resBox.classList.add('hidden');
+    return;
+  }
+
+  const s = shipments.find(x => x.id.toUpperCase() === q);
+  if (!s) {
+    errBox.textContent = `No shipment found for "${q}". Try PC100245, PC100246, or PC100247.`;
+    errBox.classList.remove('hidden');
+    resBox.classList.add('hidden');
+    return;
+  }
+
+  errBox.classList.add('hidden');
+  resBox.classList.remove('hidden');
+
+  const stageIndex = s.status === 'Delivered' ? 3 : (s.status === 'In Transit' || s.status === 'Out for Delivery') ? 2 : s.status === 'Picked Up' ? 1 : 0;
+  const stages = ['Booked', 'Picked Up', 'In Transit', 'Delivered'];
+
+  resBox.innerHTML = `
+    <div class="result-card">
+      <div class="result-top">
+        <div class="result-ids">
+          <small style="color:var(--muted);font-weight:700;text-transform:uppercase">Tracking Number</small>
+          <h3>${esc(s.id)}</h3>
+          <div style="color:var(--muted);font-size:14px">${esc(s.origin)} &rarr; ${esc(s.destination)}</div>
+        </div>
+        <span class="pill ${statusClass(s.status)}">${esc(s.status)}</span>
+      </div>
+
+      <div class="progress-track">
+        ${stages.map((st, idx) => `
+          <div class="prog-stage ${idx < stageIndex ? 'done' : idx === stageIndex ? 'active' : ''}">
+            <div class="prog-bar"></div>
+            <span>${st}</span>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="result-meta">
+        <div class="meta-item"><small>Sender</small><strong>${esc(s.sender)}</strong></div>
+        <div class="meta-item"><small>Receiver</small><strong>${esc(s.receiver)}</strong></div>
+        <div class="meta-item"><small>Booking Date</small><strong>${esc(s.date)}</strong></div>
+        <div class="meta-item"><small>Weight</small><strong>${esc(s.weight || '1.0')} kg</strong></div>
+      </div>
+
+      <h3 style="margin:0 0 16px;color:var(--navy)">Shipment Journey</h3>
+      <div class="timeline">
+        ${s.events.slice().reverse().map(ev => `
+          <div class="tl-step">
+            <strong>${esc(ev[0])}</strong>
+            <p>${esc(ev[1])}</p>
+            <small>${esc(ev[2])}</small>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function openPickupModal() {
+  document.getElementById('modalRoot').innerHTML = `
+    <div class="modal-backdrop" onclick="if(event.target===this)closeModal()">
+      <div class="modal">
+        <div class="modal-head">
+          <h3>Request Doorstep Pickup</h3>
+          <button class="btn btn-outline btn-sm" onclick="closeModal()">Close</button>
+        </div>
+        <form onsubmit="event.preventDefault(); closeModal(); toast('Doorstep pickup request submitted!');">
+          <div class="form-grid">
+            <div class="form-group"><label>Full Name</label><input class="field" required placeholder="Your name"></div>
+            <div class="form-group"><label>Phone Number</label><input class="field" required placeholder="10-digit mobile"></div>
+            <div class="form-group"><label>Pickup City</label><input class="field" required placeholder="e.g. Coimbatore"></div>
+            <div class="form-group"><label>Destination City</label><input class="field" required placeholder="e.g. Chennai"></div>
+            <div class="form-group full"><label>Pickup Address &amp; Notes</label><textarea class="field" rows="3" required placeholder="Street address and approximate weight"></textarea></div>
+          </div>
+          <div class="toolbar" style="justify-content:flex-end">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-red">Submit Pickup Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+}
+
+/* ================= AUTH & NAVIGATION ================= */
+function showLogin() {
+  document.getElementById('publicApp').classList.add('hidden');
+  document.getElementById('adminApp').classList.add('hidden');
+  document.getElementById('loginScreen').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function showPublic() {
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('adminApp').classList.add('hidden');
+  document.getElementById('publicApp').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function togglePass() {
+  const inp = document.getElementById('loginPassword');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+function fillDemoLogin() {
+  document.getElementById('loginEmail').value = 'admin@pioneercargo.com';
+  document.getElementById('loginPassword').value = 'Pioneer@123';
+}
+
+function adminLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPassword').value;
+  if (email === 'admin@pioneercargo.com' && pass === 'Pioneer@123') {
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('adminApp').classList.remove('hidden');
+    navigate('dashboard', document.querySelector('[data-page="dashboard"]'));
+    toast('Signed in to Pioneer Cargo Admin');
+  } else {
+    toast('Invalid credentials. Click Fill Demo Access.');
+  }
+}
+
+function logout() {
+  showPublic();
+  toast('Logged out of Admin Portal');
+}
+
+function navigate(page, el) {
+  if (el) {
+    document.querySelectorAll('.side-link').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+  } else {
+    const target = document.querySelector(`.side-link[data-page="${page}"]`);
+    if (target) {
+      document.querySelectorAll('.side-link').forEach(a => a.classList.remove('active'));
+      target.classList.add('active');
+    }
+  }
+  document.getElementById('sidebar').classList.remove('open');
+  renderPage(page);
+}
+
+function renderPage(page) {
+  window.currentPage = page;
+  const titles = {
+    dashboard: 'Dashboard',
+    import: 'Import Excel (.xlsx)',
+    shipments: 'Shipments & Status',
+    customers: 'Customers',
+    reports: 'Reports & Export'
+  };
+  document.getElementById('topTitle').textContent = titles[page] || 'Admin';
+  const root = document.getElementById('adminContent');
+  if (page === 'dashboard') root.innerHTML = dashboardHTML();
+  else if (page === 'import') root.innerHTML = importHTML();
+  else if (page === 'shipments') root.innerHTML = shipmentsHTML();
+  else if (page === 'customers') root.innerHTML = customersHTML();
+  else root.innerHTML = reportsHTML();
+}
+
+/* ================= IMAGE 7: OPERATIONS DASHBOARD ================= */
+function dashboardHTML() {
+  const total = shipments.length;
+  const del = shipments.filter(s => s.status === 'Delivered').length;
+  const trans = shipments.filter(s => s.status === 'In Transit' || s.status === 'Out for Delivery').length;
+  const pending = shipments.filter(s => s.status === 'Pending' || s.status === 'Picked Up').length;
+
+  return `
+    <div class="page-head">
+      <div>
+        <h1>Operations <span>Dashboard</span></h1>
+        <p>Manage shipments, import data, view reports and track operations.</p>
+      </div>
+      <div class="toolbar">
+        <button class="btn btn-green" onclick="navigate('import')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Import Excel (.xlsx)
+        </button>
+        <button class="btn btn-red" onclick="openShipment()">+ Add Shipment</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="kpi-card kpi-red">
+        <div class="kpi-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <div class="kpi-info"><small>Total Shipments</small><strong>${total}</strong></div>
+      </div>
+      <div class="kpi-card kpi-blue">
+        <div class="kpi-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="kpi-info"><small>In Transit</small><strong>${trans}</strong></div>
+      </div>
+      <div class="kpi-card kpi-green">
+        <div class="kpi-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="kpi-info"><small>Delivered</small><strong>${del}</strong></div>
+      </div>
+      <div class="kpi-card kpi-amber">
+        <div class="kpi-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="kpi-info"><small>Pending / Picked</small><strong>${pending}</strong></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc1c13" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          Recent Shipments
+        </h3>
+        <a href="#" onclick="event.preventDefault();navigate('shipments')" style="color:var(--red);font-weight:700;font-size:13px;text-decoration:none">View All &rarr;</a>
+      </div>
+      ${tableHTML(shipments.slice(-5).reverse())}
+    </div>
+  `;
+}
+
+/* ================= EXCEL IMPORT WORKFLOW ================= */
+let importState = { step: 1, fileName: '', sheetName: '', rows: [], filter: 'all' };
+
+function importHTML() {
+  const s = importState.step;
+  const total = importState.rows.length;
+  const validRows = importState.rows.filter(r => r.errors.length === 0);
+  const badRows = importState.rows.filter(r => r.errors.length > 0);
+
+  let body = '';
+  if (s === 1) {
+    body = `
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Step 1: Import Excel (.xlsx / .xls / .csv)</h3>
+          <div class="toolbar">
+            <button class="btn btn-outline btn-sm" onclick="downloadSampleXLSX()">Download Sample .xlsx</button>
+            <button class="btn btn-green btn-sm" onclick="loadDemoExcelRows()">Load Sample Excel Data</button>
+          </div>
+        </div>
+        <div class="dropzone" id="dropzone" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event)">
+          <h3 style="margin:0 0 6px;color:var(--navy)">Drop your Excel (.xlsx) file here</h3>
+          <p style="margin:0 0 16px;color:var(--muted);font-size:13px">Required columns: <code>id</code> (Tracking Number), <code>sender</code>, <code>receiver</code>, <code>origin</code>, <code>destination</code>, <code>status</code>. Optional: <code>phone</code>, <code>weight</code>, <code>date</code>.</p>
+          <input type="file" id="excelFileInput" accept=".xlsx,.xls,.csv" class="hidden" onchange="handleExcelFile(this.files[0])">
+          <button class="btn btn-green" onclick="document.getElementById('excelFileInput').click()">Choose .xlsx / .csv File</button>
+        </div>
+      </div>
+    `;
+  } else {
+    const filtered = importState.filter === 'valid' ? validRows : importState.filter === 'bad' ? badRows : importState.rows;
+    body = `
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h3>Extracted &amp; Validated: ${esc(importState.fileName)}</h3>
+            <small style="color:var(--muted)">Sheet: <b>${esc(importState.sheetName)}</b> &middot; ${total} total rows &middot; <span style="color:var(--green-dark);font-weight:700">${validRows.length} valid</span> &middot; <span style="color:var(--danger);font-weight:700">${badRows.length} flagged bad rows</span></small>
+          </div>
+          <div class="toolbar">
+            <button class="btn btn-outline btn-sm" onclick="resetImport()">Upload Different File</button>
+            ${validRows.length > 0 ? `<button class="btn btn-green" onclick="commitExcelImport()">Confirm &amp; Save ${validRows.length} to DB &rarr;</button>` : ''}
+          </div>
+        </div>
+
+        <div class="toolbar" style="margin-bottom:14px">
+          <button class="btn btn-sm ${importState.filter === 'all' ? 'btn-dark' : 'btn-outline'}" onclick="setImportFilter('all')">All Rows (${total})</button>
+          <button class="btn btn-sm ${importState.filter === 'valid' ? 'btn-green' : 'btn-outline'}" onclick="setImportFilter('valid')">Valid Ready (${validRows.length})</button>
+          <button class="btn btn-sm ${importState.filter === 'bad' ? 'btn-danger' : 'btn-outline'}" onclick="setImportFilter('bad')">Flagged Bad Rows (${badRows.length})</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Row</th><th>Validation</th><th>Tracking Number</th><th>Sender &rarr; Receiver</th><th>Route</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              ${filtered.map(r => `
+                <tr class="${r.errors.length ? 'bad-row' : ''}">
+                  <td>#${r.rowNum}</td>
+                  <td>${r.errors.length ? r.errors.map(e => `<span class="err-tag">${esc(e)}</span>`).join('') : '<span class="ok-tag">Valid</span>'}</td>
+                  <td><b>${esc(r.data.id || '—')}</b></td>
+                  <td>${esc(r.data.sender || '—')} &rarr; ${esc(r.data.receiver || '—')}</td>
+                  <td>${esc(r.data.origin || '—')} &rarr; ${esc(r.data.destination || '—')}</td>
+                  <td><span class="pill ${statusClass(r.data.status)}">${esc(r.data.status || 'Missing')}</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="page-head">
+      <div><h1>Excel <span>Import</span> Workflow</h1><p>Import Excel &rarr; Extract data &rarr; Validate bad rows &rarr; Preview &rarr; Save to DB</p></div>
+    </div>
+    <div class="import-stepper">
+      <div class="imp-step ${s > 1 ? 'done' : 'active'}"><div class="imp-badge">${s > 1 ? 'OK' : '1'}</div><div><strong>Import Excel</strong><small>Upload .xlsx</small></div></div>
+      <div class="imp-step ${s > 2 ? 'done' : s === 2 ? 'active' : ''}"><div class="imp-badge">${s > 2 ? 'OK' : '2'}</div><div><strong>Extract data</strong><small>Read all rows</small></div></div>
+      <div class="imp-step ${s > 3 ? 'done' : s === 3 ? 'active' : ''}"><div class="imp-badge">${s > 3 ? 'OK' : '3'}</div><div><strong>Validate</strong><small>Flag bad rows</small></div></div>
+      <div class="imp-step ${s > 4 ? 'done' : s === 4 ? 'active' : ''}"><div class="imp-badge">${s > 4 ? 'OK' : '4'}</div><div><strong>Preview</strong><small>Confirm import</small></div></div>
+      <div class="imp-step ${s === 5 ? 'done' : ''}"><div class="imp-badge">${s === 5 ? 'OK' : '5'}</div><div><strong>Save to DB</strong><small>Create shipments</small></div></div>
+    </div>
+    ${body}
+  `;
+}
+
+function handleDrop(e) { e.preventDefault(); e.currentTarget.classList.remove('dragover'); if (e.dataTransfer.files[0]) handleExcelFile(e.dataTransfer.files[0]); }
+function handleExcelFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const wb = XLSX.read(new Uint8Array(ev.target.result), { type: 'array' });
+      const sheetName = wb.SheetNames[0];
+      processExtractedRows(file.name, sheetName, XLSX.utils.sheet_to_json(wb.Sheets[sheetName], { defval: '' }));
+    } catch (err) { toast('Could not read Excel file: ' + err.message); }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function processExtractedRows(fileName, sheetName, rawRows) {
+  const seenIds = new Set(shipments.map(s => s.id.toUpperCase()));
+  const validated = rawRows.map((raw, idx) => {
+    const norm = {};
+    Object.keys(raw).forEach(k => { norm[k.trim().toLowerCase()] = String(raw[k] ?? '').trim(); });
+    const rowData = {
+      id: (norm.id || norm.tracking_id || norm['tracking id'] || norm['tracking number'] || '').toUpperCase(),
+      sender: norm.sender || '',
+      receiver: norm.receiver || '',
+      phone: norm.phone || '',
+      origin: norm.origin || '',
+      destination: norm.destination || '',
+      weight: norm.weight || '1.0',
+      status: norm.status || '',
+      date: norm.date || new Date().toISOString().slice(0, 10)
+    };
+    const errors = [];
+    if (!rowData.id) errors.push('Missing Tracking Number');
+    else if (seenIds.has(rowData.id)) errors.push('Duplicate Tracking Number');
+    else seenIds.add(rowData.id);
+    if (!rowData.sender) errors.push('Missing Sender');
+    if (!rowData.receiver) errors.push('Missing Receiver');
+    if (!rowData.origin) errors.push('Missing Origin');
+    if (!rowData.destination) errors.push('Missing Destination');
+    if (!VALID_STATUSES.includes(rowData.status)) errors.push('Invalid Status');
+    return { rowNum: idx + 2, data: rowData, errors };
+  });
+  importState = { step: 4, fileName, sheetName, rows: validated, filter: 'all' };
+  renderPage('import');
+  toast(`Extracted ${validated.length} rows (${validated.filter(r => r.errors.length).length} bad row(s) flagged)`);
+}
+
+function setImportFilter(f) { importState.filter = f; renderPage('import'); }
+function resetImport() { importState = { step: 1, fileName: '', sheetName: '', rows: [], filter: 'all' }; renderPage('import'); }
+function commitExcelImport() {
+  const validRows = importState.rows.filter(r => r.errors.length === 0);
+  if (!validRows.length) return;
+  const now = new Date().toLocaleString();
+  validRows.forEach(r => shipments.push({ ...r.data, updated: `Imported (${r.data.status})`, events: [['Booked', 'Shipment imported from Excel', now]] }));
+  saveDB();
+  importState.step = 5;
+  toast(`Saved ${validRows.length} shipment(s) to database!`);
+  navigate('shipments');
+}
+
+function downloadSampleXLSX() {
+  const sample = [
+    { id: 'PC100301', sender: 'Kaveri Silks', receiver: 'Anand', phone: '9876501234', origin: 'Salem', destination: 'Chennai', weight: 3.2, status: 'Pending', date: '2026-11-25' },
+    { id: 'PC100302', sender: 'Apex Tools', receiver: 'Vikram', phone: '9845012345', origin: 'Coimbatore', destination: 'Madurai', weight: 5.0, status: 'In Transit', date: '2026-11-25' },
+    { id: 'PC100245', sender: 'Duplicate Test', receiver: 'Test', phone: '9000000000', origin: 'Chennai', destination: '', weight: 1.0, status: 'BadStatus', date: '2026-11-25' }
+  ];
+  const ws = XLSX.utils.json_to_sheet(sample);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Shipments');
+  XLSX.writeFile(wb, 'pioneer-cargo-sample.xlsx');
+}
+
+function loadDemoExcelRows() {
+  processExtractedRows('sample-batch-nov.xlsx', 'Shipments', [
+    { id: 'PC100301', sender: 'Kaveri Silks', receiver: 'Anand', phone: '9876501234', origin: 'Salem', destination: 'Chennai', weight: '3.2', status: 'Pending', date: '2026-11-25' },
+    { id: 'PC100302', sender: 'Apex Tools', receiver: 'Vikram', phone: '9845012345', origin: 'Coimbatore', destination: 'Madurai', weight: '5.0', status: 'In Transit', date: '2026-11-25' },
+    { id: 'PC100245', sender: 'Duplicate Row', receiver: 'Test', phone: '9000000000', origin: 'Chennai', destination: '', weight: '1.0', status: 'Unknown', date: '2026-11-25' }
+  ]);
+}
+
+/* ================= SHIPMENTS & UPDATE STATUS ================= */
+function tableHTML(rows) {
+  if (!rows.length) return '<div style="text-align:center;padding:30px;color:var(--muted)">No shipments found.</div>';
+  return `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Tracking Number</th><th>Sender</th><th>Receiver</th><th>Origin</th><th>Destination</th><th>Booking Date</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          ${rows.map(s => `
+            <tr>
+              <td><b style="color:var(--red)">${esc(s.id)}</b></td>
+              <td>${esc(s.sender)}</td>
+              <td>${esc(s.receiver)}</td>
+              <td>${esc(s.origin)}</td>
+              <td>${esc(s.destination)}</td>
+              <td>${esc(s.date)}</td>
+              <td><span class="pill ${statusClass(s.status)}">${esc(s.status)}</span></td>
+              <td>
+                <div class="toolbar">
+                  <button class="btn btn-outline btn-sm" onclick="openShipment('${esc(s.id)}')">Update Status</button>
+                  <button class="btn btn-danger btn-sm" onclick="deleteShipment('${esc(s.id)}')">Delete</button>
+                </div>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function shipmentsHTML() {
+  return `
+    <div class="page-head">
+      <div><h1>Shipments <span>Management</span></h1><p>View, search, and update shipment statuses.</p></div>
+      <button class="btn btn-red" onclick="openShipment()">+ Add Shipment</button>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <h3>All Shipments (${shipments.length})</h3>
+        <div class="toolbar">
+          <input class="field" id="shipmentSearch" style="width:250px" placeholder="Search Tracking Number, name..." oninput="filterShipments()">
+          <select class="field" id="statusFilter" style="width:auto" onchange="filterShipments()">
+            <option value="">All Statuses</option>
+            ${VALID_STATUSES.map(st => `<option>${st}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div id="shipmentTable">${tableHTML(shipments.slice().reverse())}</div>
+    </div>
+  `;
+}
+
+function filterShipments() {
+  const q = document.getElementById('shipmentSearch').value.toLowerCase();
+  const st = document.getElementById('statusFilter').value;
+  const rows = shipments.slice().reverse().filter(s => JSON.stringify(s).toLowerCase().includes(q) && (!st || s.status === st));
+  document.getElementById('shipmentTable').innerHTML = tableHTML(rows);
+}
+
+function openShipment(id = '') {
+  const s = id ? shipments.find(x => x.id === id) : null;
+  document.getElementById('modalRoot').innerHTML = `
+    <div class="modal-backdrop" onclick="if(event.target===this)closeModal()">
+      <div class="modal">
+        <div class="modal-head">
+          <h3>${s ? 'Edit & Update Status' : 'Add New Shipment'}</h3>
+          <button class="btn btn-outline btn-sm" onclick="closeModal()">Close</button>
+        </div>
+        <form onsubmit="saveShipment(event, '${s ? esc(id) : ''}')">
+          <div class="form-grid">
+            <div class="form-group"><label>Tracking Number</label><input class="field" name="id" required placeholder="e.g. PC100248" value="${esc(s?.id || '')}" ${s ? 'readonly' : ''}></div>
+            <div class="form-group"><label>Booking Date</label><input class="field" name="date" type="date" required value="${esc(s?.date || '')}"></div>
+            <div class="form-group"><label>Sender Name</label><input class="field" name="sender" required value="${esc(s?.sender || '')}"></div>
+            <div class="form-group"><label>Receiver Name</label><input class="field" name="receiver" required value="${esc(s?.receiver || '')}"></div>
+            <div class="form-group"><label>Receiver Phone</label><input class="field" name="phone" value="${esc(s?.phone || '')}"></div>
+            <div class="form-group"><label>Weight (KG)</label><input class="field" name="weight" type="number" step="0.1" min="0" value="${esc(s?.weight || '1.0')}"></div>
+            <div class="form-group"><label>Origin</label><input class="field" name="origin" required value="${esc(s?.origin || '')}"></div>
+            <div class="form-group"><label>Destination</label><input class="field" name="destination" required value="${esc(s?.destination || '')}"></div>
+            <div class="form-group full"><label>Shipment Status</label><select class="field" name="status">${VALID_STATUSES.map(st => `<option ${s?.status === st ? 'selected' : ''}>${st}</option>`).join('')}</select></div>
+            ${s ? `<div class="form-group full"><label>Status Update Note</label><input class="field" name="note" placeholder="e.g. Arrived at Chennai sorting hub"></div>` : ''}
+          </div>
+          <div class="toolbar" style="justify-content:flex-end">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-red">${s ? 'Save & Update Status' : 'Create Shipment'}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+}
+
+function saveShipment(e, oldId) {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(e.target).entries());
+  d.id = d.id.trim().toUpperCase();
+  if (oldId) {
+    const s = shipments.find(x => x.id === oldId);
+    const changed = s.status !== d.status || (d.note && d.note.trim());
+    const note = d.note?.trim() || `Status updated to ${d.status}`;
+    delete d.note;
+    Object.assign(s, d);
+    if (changed) {
+      s.updated = note;
+      s.events.push([d.status, note, new Date().toLocaleString()]);
+    }
+  } else {
+    if (shipments.some(x => x.id === d.id)) { toast('Tracking Number already exists'); return; }
+    d.events = [['Booked', 'Shipment booked and created', new Date().toLocaleString()]];
+    d.updated = 'Shipment booked';
+    shipments.push(d);
+  }
+  saveDB();
+  closeModal();
+  renderPage(window.currentPage);
+  toast(oldId ? 'Shipment updated' : 'Shipment created');
+}
+
+function deleteShipment(id) {
+  if (confirm(`Delete shipment ${id}?`)) {
+    shipments = shipments.filter(s => s.id !== id);
+    saveDB();
+    renderPage(window.currentPage);
+    toast('Shipment deleted');
+  }
+}
+
+function closeModal() { document.getElementById('modalRoot').innerHTML = ''; }
+
+function customersHTML() {
+  const map = {};
+  shipments.forEach(s => {
+    if (!map[s.receiver]) map[s.receiver] = { phone: s.phone || '—', count: 0 };
+    map[s.receiver].count++;
+  });
+  return `
+    <div class="page-head"><div><h1>Customers <span>Directory</span></h1><p>Receivers extracted from shipment records.</p></div></div>
+    <div class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Receiver Name</th><th>Phone</th><th>Total Shipments</th></tr></thead>
+          <tbody>${Object.keys(map).map(n => `<tr><td><b>${esc(n)}</b></td><td>${esc(map[n].phone)}</td><td>${map[n].count}</td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function reportsHTML() {
+  const total = shipments.length;
+  return `
+    <div class="page-head">
+      <div><h1>Reports &amp; <span>Export</span></h1><p>Download all shipment records as Excel (.xlsx).</p></div>
+      <button class="btn btn-green" onclick="exportXLSX()">Export Excel (.xlsx)</button>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">Status Breakdown (${total} Total)</h3>
+      ${VALID_STATUSES.map(st => {
+        const count = shipments.filter(s => s.status === st).length;
+        const pct = total ? Math.round((count / total) * 100) : 0;
+        return `
+          <div style="margin:14px 0">
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><b>${st}</b><span>${count} (${pct}%)</span></div>
+            <div style="height:10px;background:#e2e8f0;border-radius:8px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${st === 'Delivered' ? 'var(--green)' : st === 'Exception' ? 'var(--danger)' : 'var(--red)'}"></div></div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function exportXLSX() {
+  const rows = shipments.map(s => ({ id: s.id, sender: s.sender, receiver: s.receiver, phone: s.phone, origin: s.origin, destination: s.destination, weight: s.weight, status: s.status, date: s.date, updated: s.updated }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Shipments');
+  XLSX.writeFile(wb, 'pioneer-cargo-shipments.xlsx');
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+switchShowcase(0);
+</script>
+</body>
+</html>
